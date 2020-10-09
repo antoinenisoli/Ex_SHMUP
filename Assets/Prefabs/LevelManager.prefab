@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8030235522997209173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8030235522997209175}
+  - component: {fileID: 8030235522997209172}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8030235522997209175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030235522997209173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.323, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8030235522997209172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030235522997209173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028f1e7c61db648419d9ce26389df0ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalScore: 0
+  spawnLine: 1.5
+  spawnData:
+  - _name: Enemies
+    spawnRate: 2
+    toSpawn:
+    - {fileID: 2320999757465278776, guid: 9f5d5139e8bb4084686fd27284865985, type: 3}
+    - {fileID: 2320999757465278776, guid: d6dd14adc387c7d4ba7130045932dcce, type: 3}
+    - {fileID: 2320999757465278776, guid: 1136755695661c24c848f827d9a2cd8f, type: 3}
+    - {fileID: 9210644425007964959, guid: df45ce328ad61d94ea3619e400f589c0, type: 3}
+  - _name: Items
+    spawnRate: 5
+    toSpawn:
+    - {fileID: 7782156063174306415, guid: 0fe65fbed341f8342b0f314a13ec2862, type: 3}
+    - {fileID: 6136204249645494686, guid: c3f23cd96142ff94cb9d8a8e89dc7325, type: 3}
