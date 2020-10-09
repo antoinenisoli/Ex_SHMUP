@@ -21,4 +21,9 @@ public class Sc_Menu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void PlayButtonSound(string soundName = "Bip00")
+    {
+        Sc_SoundManager.Instance.PlaySound(soundName, 0.2f, 1);
+    }
 }
