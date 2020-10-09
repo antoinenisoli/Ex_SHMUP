@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenRes: {x: 480, y: 640}
+  fullScreen: 1
 --- !u!1001 &563692264
 PrefabInstance:
   m_ObjectHideFlags: 0

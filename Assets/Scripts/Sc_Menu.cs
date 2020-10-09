@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class Sc_Menu : MonoBehaviour
 {
     [SerializeField] Vector2 screenRes = new Vector2(480, 640);
+    [SerializeField] bool fullScreen;
 
     private void Awake()
     {
-        Screen.SetResolution((int)screenRes.x, (int)screenRes.y, false);
+        if (!fullScreen)
+            Screen.SetResolution((int)screenRes.x, (int)screenRes.y, fullScreen);
     }
 
     public void Leave()
