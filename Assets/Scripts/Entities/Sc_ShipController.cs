@@ -47,6 +47,9 @@ public class Sc_ShipController : Sc_EntityShooting
     float inputY;
     float inputX;
 
+    [SerializeField] GameObject pauseScreen;
+    bool paused;
+
     public override void Awake()
     {
         base.Awake();
@@ -215,6 +218,15 @@ public class Sc_ShipController : Sc_EntityShooting
         if (Input.GetKeyDown(KeyCode.R))
             Reload();
 
+        if (Input.GetButtonDown("Cancel") && !paused)
+            paused = true;
+        else if (paused && Input.anyKeyDown)
+        {
+            paused = false;
+        }
+
+        Time.timeScale = paused ? 0 : 1;
+        pauseScreen.SetActive(paused);
         base.Update();
         Move();
     }

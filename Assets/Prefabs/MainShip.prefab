@@ -385,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 5968268186501356613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.83172, y: 0.83172, z: 0.83172}
+  m_LocalScale: {x: 0.3134919, y: 0.3134919, z: 0.3134919}
   m_Children:
   - {fileID: 5968268185344013633}
   - {fileID: 5968268186897837888}
@@ -434,6 +434,7 @@ MonoBehaviour:
   energySlider: {fileID: 0}
   currentEnergy: 0
   maxEnergy: 100
+  pauseScreen: {fileID: 0}
 --- !u!61 &5968268186501356610
 BoxCollider2D:
   m_ObjectHideFlags: 0
