@@ -51,8 +51,8 @@ public class Sc_Entity : MonoBehaviour
 
     //movements
     [Header("Movements")]
-    [SerializeField] protected int damage = 1;
     [SerializeField] protected float moveSpeed = 15;
+    [SerializeField] protected int damage = 1;
 
     public virtual void Awake()
     {
@@ -98,5 +98,10 @@ public class Sc_Entity : MonoBehaviour
     public virtual void Death()
     {
         Instantiate(explosionFX, transform.position, Quaternion.identity);
+    }
+
+    public virtual void FixedUpdate()
+    {
+        
     }
 }

@@ -20,11 +20,13 @@ public class Sc_ShipController : Sc_EntityShooting
     [SerializeField] Sc_ShootConfig[] allConfigs;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] LineRenderer laserFx;
+    float powerUpDuration;
 
     [Header("Laser")]
     [SerializeField] Slider energySlider;
     [SerializeField] float currentEnergy;
     [SerializeField] float maxEnergy = 100;
+
     public float CurrentEnergy
     {
         get => currentEnergy;
@@ -69,11 +71,13 @@ public class Sc_ShipController : Sc_EntityShooting
 
     void Reload()
     {
+        Sc_LevelManager.GlobalScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public override void Respawn()
     {
+        powerUpDuration = 0;
         anim.SetTrigger("Arrival");
         base.Respawn();
     }
@@ -81,17 +85,11 @@ public class Sc_ShipController : Sc_EntityShooting
     public void SwitchShootMode(ShootMode mode, float duration)
     {
         shootMode = mode;
-        StartCoroutine(ResetShootMode(duration));
-    }
 
-    IEnumerator ResetShootMode(float _duration)
-    {
-        yield return new WaitForSeconds(_duration);
-        Sc_SoundManager.Instance.PlaySound("Powering down 01", 0.1f, 1.5f);
-        if (shootMode != ShootMode.Semi)
-        {
-            shootMode = ShootMode.Semi;
-        }
+        if (mode != ShootMode.Semi)
+            powerUpDuration = duration;
+        else
+            powerUpDuration = 0;
     }
 
     void Move()
@@ -119,12 +117,12 @@ public class Sc_ShipController : Sc_EntityShooting
     public void ShootLaser()
     {
         Sc_SoundManager.Instance.PlaySound(shootConfig.bulletSound, 0.05f, 2.5f);
-        float dist = Vector2.Distance(shootPos.position, Vector2.up * camBoundsY.y);
-        Debug.DrawRay(shootPos.position, transform.up * dist, Color.red);
+        float dist = Vector2.Distance(shootPoses[0].position, Vector2.up * camBoundsY.y);
+        Debug.DrawRay(shootPoses[0].position, transform.up * dist, Color.red);
 
         Vector3 length = new Vector3(laserFx.startWidth, 1);
-        RaycastHit2D[] hitEnemy = Physics2D.BoxCastAll(shootPos.position, length, 0, transform.up, dist, enemyLayer);
-        laserFx.SetPosition(1, new Vector3(shootPos.position.x, camBoundsY.y + 1.5f));
+        RaycastHit2D[] hitEnemy = Physics2D.BoxCastAll(shootPoses[0].position, length, 0, transform.up, dist, enemyLayer);
+        laserFx.SetPosition(1, new Vector3(shootPoses[0].position.x, camBoundsY.y + 1.5f));
 
         foreach (RaycastHit2D hit in hitEnemy)
         {
@@ -144,26 +142,29 @@ public class Sc_ShipController : Sc_EntityShooting
         shootConfig = allConfigs[(int)shootMode];
         modeDisplay.text = shootMode.ToString();
         modeDisplay.color = shootConfig.displayColor;
+
         switch (shootMode)
         {
             case ShootMode.Auto:
-                laserFx.SetPosition(0, shootPos.position);
-                laserFx.SetPosition(1, shootPos.position);
+                laserFx.SetPosition(0, shootPoses[0].position);
+                laserFx.SetPosition(1, shootPoses[0].position);
                 if (Input.GetButton("Fire1") && fireDelay > shootConfig.fireRate)
                 {
-                    ShootBullet(shootPos);
+                    ShootBullet(shootPoses[0]);
                 }
                 break;
+
             case ShootMode.Semi:
-                laserFx.SetPosition(0, shootPos.position);
-                laserFx.SetPosition(1, shootPos.position);
-                if (Input.GetButtonDown("Fire1") && fireDelay > shootConfig.fireRate)
+                laserFx.SetPosition(0, shootPoses[0].position);
+                laserFx.SetPosition(1, shootPoses[0].position);
+                if (Input.GetButton("Fire1") && fireDelay > shootConfig.fireRate)
                 {
-                    ShootBullet(shootPos);
+                    ShootBullet(shootPoses[0]);
                 }
                 break;
+
             case ShootMode.Laser:
-                laserFx.SetPosition(0, shootPos.position);
+                laserFx.SetPosition(0, shootPoses[0].position);
                 laserFx.gameObject.SetActive(Input.GetButton("Fire1"));
                 if (Input.GetButton("Fire1"))
                 {
@@ -200,7 +201,7 @@ public class Sc_ShipController : Sc_EntityShooting
         spr.material = baseMat;
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (isDead)
         {
@@ -211,6 +212,8 @@ public class Sc_ShipController : Sc_EntityShooting
             Vector2 vel = new Vector2(inputX, inputY);
             rb.velocity = vel.normalized * moveSpeed * Time.deltaTime;
         }
+
+        base.FixedUpdate();
     }
 
     public override void Update()
@@ -219,10 +222,23 @@ public class Sc_ShipController : Sc_EntityShooting
             Reload();
 
         if (Input.GetButtonDown("Cancel") && !paused)
+        {
             paused = true;
+        }
         else if (paused && Input.anyKeyDown)
         {
             paused = false;
+        }
+
+        if (shootMode != ShootMode.Semi)
+        {
+            powerUpDuration -= Time.deltaTime;
+
+            if (powerUpDuration <= 0)
+            {
+                shootMode = ShootMode.Semi;
+                Sc_SoundManager.Instance.PlaySound("Powering down 01", 0.1f, 1.5f);
+            }
         }
 
         Time.timeScale = paused ? 0 : 1;

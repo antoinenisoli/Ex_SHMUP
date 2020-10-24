@@ -7,7 +7,7 @@ public class Sc_EntityShooting : Sc_Entity
     //shoot
     [Header("Shoot")]
     [SerializeField] protected Sc_ShootConfig shootConfig;
-    [SerializeField] protected Transform shootPos;
+    [SerializeField] protected Transform[] shootPoses;
     protected float fireDelay;
 
     public virtual void ShootBullet(Transform pos)

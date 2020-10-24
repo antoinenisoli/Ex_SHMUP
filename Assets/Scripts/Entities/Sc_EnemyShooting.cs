@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Sc_EnemyShooting : Sc_Enemy
 {
-    Sc_ShipController player => FindObjectOfType<Sc_ShipController>();
-
-    [SerializeField] Transform shootPos02;
+    protected Sc_ShipController player => FindObjectOfType<Sc_ShipController>();
 
     public override void ShootBullet(Transform pos)
     {
@@ -26,8 +24,10 @@ public class Sc_EnemyShooting : Sc_Enemy
 
         if (player != null && !player.isDead && fireDelay > shootConfig.fireRate && player.transform.position.y < transform.position.y)
         {
-            ShootBullet(shootPos);
-            ShootBullet(shootPos02);
+            foreach (Transform pos in shootPoses)
+            {
+                ShootBullet(pos);
+            }
         }
     }
 }

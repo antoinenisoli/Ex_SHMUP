@@ -413,10 +413,11 @@ MonoBehaviour:
     type: 3}
   isDead: 0
   hitColor: {r: 1, g: 0, b: 0, a: 1}
-  damage: 1
   moveSpeed: 160
+  damage: 1
   shootConfig: {fileID: 11400000, guid: 8004588f02b393646bd082968a9b4fe0, type: 2}
-  shootPos: {fileID: 5968268185193270084}
+  shootPoses:
+  - {fileID: 5968268185193270084}
   lifes: 3
   respawnDelay: 2
   camBoundsX: 1.5

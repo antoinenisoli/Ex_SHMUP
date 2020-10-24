@@ -29,8 +29,8 @@ public class Sc_Bullet : Sc_Item
         CheckBounds();
     }
 
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
-        
+        //don't affect the bullet direction
     }
 }

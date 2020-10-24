@@ -10,6 +10,6 @@ public class Sc_ScoreDisplay : MonoBehaviour
 
     private void Update()
     {
-        myText.text = "Score = " + manager.GlobalScore;
+        myText.text = "Score = " + Sc_LevelManager.GlobalScore;
     }
 }

@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028f1e7c61db648419d9ce26389df0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalScore: 0
   spawnLine: 1.5
   spawnData:
   - _name: Enemies
@@ -53,8 +52,20 @@ MonoBehaviour:
     - {fileID: 2320999757465278776, guid: d6dd14adc387c7d4ba7130045932dcce, type: 3}
     - {fileID: 2320999757465278776, guid: 1136755695661c24c848f827d9a2cd8f, type: 3}
     - {fileID: 9210644425007964959, guid: df45ce328ad61d94ea3619e400f589c0, type: 3}
+    spawnOnLine: 1
+    spawnPos: 0
   - _name: Items
     spawnRate: 5
     toSpawn:
     - {fileID: 7782156063174306415, guid: 0fe65fbed341f8342b0f314a13ec2862, type: 3}
     - {fileID: 6136204249645494686, guid: c3f23cd96142ff94cb9d8a8e89dc7325, type: 3}
+    - {fileID: 6136204249645494686, guid: 79b2b50fcd2b1914fa8b5642ad83770d, type: 3}
+    - {fileID: 6136204249645494686, guid: 1d990e5a6b654184cbbc40f0204c99e8, type: 3}
+    spawnOnLine: 1
+    spawnPos: 0
+  - _name: 'Patrolling '
+    spawnRate: 20
+    toSpawn:
+    - {fileID: 5378932517428485132, guid: 1d8087e684c31f241aa25d51abb52eb5, type: 3}
+    spawnOnLine: 0
+    spawnPos: 0

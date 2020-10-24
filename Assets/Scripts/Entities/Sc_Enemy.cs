@@ -16,7 +16,7 @@ public class Sc_Enemy : Sc_EntityShooting
         gameObject.SetActive(transform.position.y > maxPos);
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
         rb.velocity = Vector2.down * moveSpeed * Time.deltaTime;
     }

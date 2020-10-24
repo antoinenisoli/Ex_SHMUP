@@ -42,7 +42,7 @@ public class Sc_Item : MonoBehaviour
         CheckBounds();
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         rb.velocity = Vector2.down * scrollingSpeed * Time.deltaTime;
     }

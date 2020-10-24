@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6136204249645494685}
-  - component: {fileID: 3844848883410037630}
+  - component: {fileID: 9186448433000134785}
   - component: {fileID: 6136204249645494684}
   - component: {fileID: 3400997260448163851}
   m_Layer: 0
-  m_Name: HealGem
+  m_Name: EnergyGem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,13 +28,13 @@ Transform:
   m_GameObject: {fileID: 6136204249645494686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6782093, y: 2.6782093, z: 2.6782093}
   m_Children:
   - {fileID: 6136204250282429416}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3844848883410037630
+--- !u!114 &9186448433000134785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,13 +43,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6136204249645494686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a187e423be459e64ea004f98cfc2fb64, type: 3}
+  m_Script: {fileID: 11500000, guid: e2320c6475fb4b44f993a98ca6c91b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingSpeed: 20
   boundX: 2
   boundsY: {x: -0.3, y: 5}
-  healValue: 1
+  energyValue: 30
 --- !u!61 &6136204249645494684
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,9 +168,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2736499818438160973, guid: 61b4ec7dacdbf094d86308f761750f4c,
-    type: 3}
-  m_Color: {r: 0.34685266, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 896fa737325d8084c9e34fdced274b55, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
