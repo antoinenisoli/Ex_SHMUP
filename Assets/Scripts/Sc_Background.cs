@@ -2,24 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Sc_Background : MonoBehaviour
 {
-    [SerializeField] float speed = 0.01f;
-    [SerializeField] float maxPos = -8;
-    Vector3 startPos;
-
-    private void Awake()
-    {
-        startPos = transform.position;
-    }
+    Renderer render => GetComponent<Renderer>();
+    [SerializeField] float speed = 1f;
 
     private void Update()
     {
-        transform.position -= Vector3.up * speed * Time.deltaTime;
-
-        if (transform.position.y < maxPos)
-        {
-            transform.position = startPos;
-        }
+        render.sortingOrder = -100;
+        render.material.mainTextureOffset = Vector2.up * (Time.time * speed % 1);
     }
 }
