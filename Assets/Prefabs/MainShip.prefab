@@ -418,10 +418,10 @@ MonoBehaviour:
   shootConfig: {fileID: 11400000, guid: 8004588f02b393646bd082968a9b4fe0, type: 2}
   shootPoses:
   - {fileID: 5968268185193270084}
+  anim: {fileID: 5968268185344013663}
   lifes: 3
   respawnDelay: 2
-  camBoundsX: 1.5
-  camBoundsY: {x: -0.3, y: 3.9}
+  camBounds: {x: 0.2, y: 0.5}
   shootMode: 0
   modeDisplay: {fileID: 0}
   allConfigs:

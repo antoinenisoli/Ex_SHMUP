@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_Enemy : Sc_EntityShooting
+public class Enemy : Entity
 {
-    Sc_LevelManager manager => FindObjectOfType<Sc_LevelManager>();
     [SerializeField] int scoreValue = 100;
     [SerializeField] float maxPos = -7;
     [HideInInspector] public float hitDelay;
@@ -23,19 +22,16 @@ public class Sc_Enemy : Sc_EntityShooting
 
     public override void Death()
     {
-        manager.IncreaseScore(scoreValue);
+        LevelManager.Instance.IncreaseScore(scoreValue);
         gameObject.SetActive(false);
-        Sc_SoundManager.Instance.PlaySound("Explosion01", 0.1f, 1);
+        SoundManager.Instance.PlaySound("Explosion01", 0.1f, 1);
         base.Death();
     }
 
     public void OnTriggerEnter2D(Collider2D col)
     {
-        Sc_Entity _entity = col.GetComponent<Sc_Entity>();
-
-        if (_entity != null && _entity.GetComponent<Sc_ShipController>())
-        {
+        Entity _entity = col.GetComponent<Entity>();
+        if (_entity != null && _entity.GetComponent<ShipController>())
             _entity.ModifyHealth(damage);
-        }
     }
 }

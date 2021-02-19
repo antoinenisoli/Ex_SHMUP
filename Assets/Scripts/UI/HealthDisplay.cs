@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sc_HealthDisplay : MonoBehaviour
+public class HealthDisplay : MonoBehaviour
 {
-    Sc_ShipController ship => FindObjectOfType<Sc_ShipController>();
+    ShipController ship;
     [SerializeField] bool HealthOrLifes;
     [SerializeField] Image[] hearts;
     [SerializeField] Sprite full, empty;
@@ -13,26 +13,17 @@ public class Sc_HealthDisplay : MonoBehaviour
     private void Awake()
     {
         hearts = GetComponentsInChildren<Image>();
+        ship = FindObjectOfType<ShipController>();
     }
 
     private void Update()
     {
         if (ship != null)
-        {
             if (HealthOrLifes)
-            {
                 for (int i = 0; i < hearts.Length; i++)
-                {
                     hearts[i].sprite = ship.CurrentHealth > i ? full : empty;
-                }
-            }
             else
-            {
                 for (int i = 0; i < hearts.Length; i++)
-                {
                     hearts[i].sprite = ship.lifes > i ? full : empty;
-                }
-            }
-        }
     }
 }

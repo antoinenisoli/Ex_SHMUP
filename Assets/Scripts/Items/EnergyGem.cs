@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_EnergyGem : Sc_Item
+public class EnergyGem : Item
 {
     [SerializeField] int energyValue = 30;
 
-    public override void Effect(Sc_Entity entity)
+    public override void Effect(Entity entity)
     {
-        base.Effect(entity);
-        Sc_ShipController ship = entity.GetComponent<Sc_ShipController>();
+        ShipController ship = entity.GetComponent<ShipController>();
         if (ship && ship.CurrentHealth < ship.MaxHealth)
         {
             ship.CurrentEnergy += energyValue;

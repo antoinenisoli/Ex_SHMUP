@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c96ace68c47a9741bca58d8b74c0291, type: 3}
   m_Name: LaserConfig
   m_EditorClassIdentifier: 
+  name: Laser
   bulletSound: Shoot09
+  mode: 1
   displayColor: {r: 1, g: 0, b: 0.81733704, a: 1}
   bullet: {fileID: 3239853950626851083, guid: 8cb7556b3481c9140a40e6c4e0571953, type: 3}
   bulletSpeed: 8

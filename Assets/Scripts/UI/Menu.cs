@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Sc_Menu : MonoBehaviour
+public class Menu : MonoBehaviour
 {
     [SerializeField] Vector2 screenRes = new Vector2(480, 640);
     [SerializeField] bool fullScreen;
@@ -14,18 +15,17 @@ public class Sc_Menu : MonoBehaviour
             Screen.SetResolution((int)screenRes.x, (int)screenRes.y, fullScreen);
     }
 
-    public void Leave()
+    public void PlayDifficulty(string diff = "Easy")
     {
-        Application.Quit();
-    }
-
-    public void Play()
-    {
-        SceneManager.LoadScene(1);
+        if (Enum.TryParse(diff, out Difficulty yourEnum))
+        {
+            LevelManager.Instance.SetDifficulty(yourEnum);
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void PlayButtonSound(string soundName = "Bip00")
     {
-        Sc_SoundManager.Instance.PlaySound(soundName, 0.2f, 1);
+        SoundManager.Instance.PlaySound(soundName, 0.2f, 1);
     }
 }

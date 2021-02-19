@@ -138,7 +138,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9210644425007964959}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 4.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.66366, y: 0.66366, z: 0.66366}
   m_Children:
   - {fileID: 9210644423830890944}
@@ -169,13 +169,13 @@ MonoBehaviour:
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   moveSpeed: 20
   damage: 1
+  scoreValue: 200
+  maxPos: -7
+  hitDelay: 0
   shootConfig: {fileID: 11400000, guid: 93fb3fef62b3b14489fb3a3931741535, type: 2}
   shootPoses:
   - {fileID: 9210644425066574134}
   - {fileID: 9210644423212212933}
-  scoreValue: 200
-  maxPos: -7
-  hitDelay: 0
 --- !u!50 &9210644425007964929
 Rigidbody2D:
   serializedVersion: 4

@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c96ace68c47a9741bca58d8b74c0291, type: 3}
-  m_Name: AutoConfig
+  m_Name: AutoFastConfig
   m_EditorClassIdentifier: 
+  name: Fast
   bulletSound: Shoot010
-  displayColor: {r: 1, g: 0.62352943, b: 0.2392157, a: 1}
+  mode: 0
+  displayColor: {r: 0.23921567, g: 0.84966004, b: 1, a: 1}
   bullet: {fileID: 3239853950626851083, guid: fc11683f996e91542aaf8bea810a823c, type: 3}
   bulletSpeed: 8
   fireRate: 0.1

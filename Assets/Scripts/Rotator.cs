@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_Rotator : MonoBehaviour
+public class Rotator : MonoBehaviour
 {
     enum RotationType
     {

@@ -5,7 +5,7 @@ using System.Threading;
 using UnityEditor;
 using UnityEngine;
 
-public class Sc_SoundManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
     [Serializable]
     public class GlobalAudio
@@ -50,7 +50,7 @@ public class Sc_SoundManager : MonoBehaviour
         #endif
     }
 
-    public static Sc_SoundManager Instance;
+    public static SoundManager Instance;
     [SerializeField] GlobalAudio soundsData;
 
     private void Awake()

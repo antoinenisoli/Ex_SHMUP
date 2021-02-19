@@ -5,15 +5,16 @@ using UnityEngine;
 
 public enum ShootMode
 {
-    Semi,
     Auto,
     Laser,
 }
 
 [CreateAssetMenu(fileName = "ShootConfig", menuName = "ShootConfig/Config")]
-public class Sc_ShootConfig : ScriptableObject
+public class ShootConfig : ScriptableObject
 {
+    public new string name;
     public string bulletSound = "Shoot01";
+    public ShootMode mode;
     public Color displayColor = Color.white;
     public GameObject bullet;
     public float bulletSpeed = 8;

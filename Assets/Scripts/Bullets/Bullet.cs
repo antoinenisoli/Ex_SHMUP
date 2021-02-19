@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_Bullet : Sc_Item
+public class Bullet : Item
 {
-    Sc_ShipController ship => FindObjectOfType<Sc_ShipController>();
     protected int dmg;
 
     public void Initialize(int _damage)
@@ -12,14 +11,13 @@ public class Sc_Bullet : Sc_Item
         dmg = _damage;
     }
 
-    public override void Effect(Sc_Entity entity)
+    public override void Effect(Entity entity)
     {
-        base.Effect(entity);
-        if (entity.GetComponent<Sc_Enemy>())
+        if (entity.GetComponent<Enemy>())
         {
             entity.ModifyHealth(dmg);
             ship.CurrentEnergy++;
-            Sc_SoundManager.Instance.PlaySound("Hurt07", 0.1f, 1.5f);
+            SoundManager.Instance.PlaySound("Hurt07", 0.1f, 1.5f);
             Destroy(gameObject);
         }
     }

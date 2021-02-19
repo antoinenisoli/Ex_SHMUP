@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_PowerUp : Sc_Item
+public class PowerUp : Item
 {
     [SerializeField] ShootMode mode;
     [SerializeField] float powerDuration = 5;
 
-    public override void Effect(Sc_Entity entity)
+    public override void Effect(Entity entity)
     {
-        base.Effect(entity);
-        Sc_ShipController ship = entity.GetComponent<Sc_ShipController>();
+        ShipController ship = entity.GetComponent<ShipController>();
         if (ship)
         {
             ship.SwitchShootMode(mode, powerDuration);

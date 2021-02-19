@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Sc_ShipController : Sc_EntityShooting
+public class ShipController : EntityShooting
 {
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
     Animator anim => GetComponentInChildren<Animator>();
     Camera mainCam => Camera.main;
     float inputY;
@@ -14,15 +15,24 @@ public class Sc_ShipController : Sc_EntityShooting
     [SerializeField] GameObject pauseScreen;
     bool paused;
     Vector3 smoothPosition;
+=======
+    [SerializeField] Animator anim;
+    Camera viewCam;
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
 
     [Header("Player controller")]
     public int lifes = 3;
     [SerializeField] float respawnDelay = 2;
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
+=======
+    [SerializeField] Vector2 camBounds = new Vector2(0.5f, 0.5f);
+    Vector2 screenBounds;
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
 
     [Header("Player Shooting")]
-    [SerializeField] ShootMode shootMode = ShootMode.Semi;
+    [SerializeField] ShootMode shootMode = ShootMode.Auto;
     [SerializeField] Text modeDisplay; 
-    [SerializeField] Sc_ShootConfig[] allConfigs;
+    [SerializeField] ShootConfig[] allConfigs;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] LineRenderer laserFx;
     float powerUpDuration;
@@ -39,9 +49,7 @@ public class Sc_ShipController : Sc_EntityShooting
         set
         {
             if (value < 0)
-            {
                 value = 0;
-            }
 
             if (value > MaxEnergy)
                 value = MaxEnergy;
@@ -51,9 +59,25 @@ public class Sc_ShipController : Sc_EntityShooting
     }
     public float MaxEnergy { get => maxEnergy; set => maxEnergy = value; }
 
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
+=======
+    float inputY;
+    float inputX;
+
+    [SerializeField] GameObject pauseScreen;
+    bool paused;
+
+    public override void Awake()
+    {
+        base.Awake();
+        anim = GetComponentInChildren<Animator>();
+        viewCam = Camera.main;
+    }
+
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
     public override void Death()
     {
-        Sc_SoundManager.Instance.PlaySound("Explosion010", 0.1f, 1);
+        SoundManager.Instance.PlaySound("Explosion010", 0.1f, 1);
         base.Death();
         lifes--;
         
@@ -65,7 +89,7 @@ public class Sc_ShipController : Sc_EntityShooting
 
     public void Reload()
     {
-        Sc_LevelManager.GlobalScore = 0;
+        LevelManager.Instance.GlobalScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -79,53 +103,68 @@ public class Sc_ShipController : Sc_EntityShooting
     public void SwitchShootMode(ShootMode mode, float duration)
     {
         shootMode = mode;
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
         if (mode != ShootMode.Semi)
             powerUpDuration = duration;
         else
             powerUpDuration = 0;
+=======
+        powerUpDuration = duration;
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
     }
 
     void Move()
     {
-        //main player controls
-        inputX = Input.GetAxisRaw("Horizontal");
-        inputY = Input.GetAxisRaw("Vertical");
-
         //clamp the position into the game view
         Vector2 pos = transform.position;
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
         float offset = 0.2f;
         Vector2 screenBounds = mainCam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
         screenBounds.x -= offset;
         screenBounds.y -= offset;
         pos.x = Mathf.Clamp(pos.x, -screenBounds.x, screenBounds.x);
         pos.y = Mathf.Clamp(pos.y, -0.5f + offset, screenBounds.y);
+=======
+        screenBounds = viewCam.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
+        float bottomScreen = screenBounds.y - viewCam.orthographicSize * 2 + camBounds.y;
+        pos.x = Mathf.Clamp(pos.x, -screenBounds.x + camBounds.x, screenBounds.x - camBounds.x);
+        pos.y = Mathf.Clamp(pos.y, bottomScreen, screenBounds.y - camBounds.y);
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
         transform.position = pos;
     }
 
-    public override void ShootBullet(Transform pos)
+    public new void ShootBullet(Transform pos)
     {
         base.ShootBullet(pos);
         GameObject newBullet = Instantiate(shootConfig.bullet, pos.position, Quaternion.identity);
         Rigidbody2D bulletRb = newBullet.GetComponent<Rigidbody2D>();
         bulletRb.velocity = Vector2.up * shootConfig.bulletSpeed;
-        newBullet.GetComponent<Sc_Bullet>().Initialize(damage);
+        newBullet.GetComponent<Bullet>().Initialize(damage);
     }
 
     public void ShootLaser()
     {
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
         Vector2 camBounds = mainCam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
         Sc_SoundManager.Instance.PlaySound(shootConfig.bulletSound, 0.05f, 2.5f);
         float dist = Vector2.Distance(shootPoses[0].position, Vector2.up * camBounds.y);
+=======
+        SoundManager.Instance.PlaySound(shootConfig.bulletSound, 0.05f, 2.5f);
+        float dist = Vector2.Distance(shootPoses[0].position, Vector2.up * screenBounds.y);
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
         Debug.DrawRay(shootPoses[0].position, transform.up * dist, Color.red);
 
         Vector3 length = new Vector3(laserFx.startWidth, 1);
         RaycastHit2D[] hitEnemy = Physics2D.BoxCastAll(shootPoses[0].position, length, 0, transform.up, dist, enemyLayer);
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
         laserFx.SetPosition(1, new Vector3(shootPoses[0].position.x, camBounds.y + 1.5f));
+=======
+        laserFx.SetPosition(1, new Vector3(shootPoses[0].position.x, screenBounds.y + 1.5f));
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
 
         foreach (RaycastHit2D hit in hitEnemy)
         {
-            Sc_Enemy enemy = hit.collider.gameObject.GetComponent<Sc_Enemy>();
-
+            Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
             if (enemy && enemy.hitDelay > shootConfig.fireRate)
             {
                 enemy.hitDelay = 0;
@@ -138,7 +177,7 @@ public class Sc_ShipController : Sc_EntityShooting
     {
         base.Shooting();        
         shootConfig = allConfigs[(int)shootMode];
-        modeDisplay.text = shootMode.ToString();
+        modeDisplay.text = shootConfig.name;
         modeDisplay.color = shootConfig.displayColor;
         laserFx.SetPosition(0, shootPoses[0].position);
 
@@ -152,16 +191,34 @@ public class Sc_ShipController : Sc_EntityShooting
         }
         else
         {
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
             laserFx.SetPosition(1, shootPoses[0].position);
             if (Input.GetButton("Fire1") && fireDelay > shootConfig.fireRate)
             {
                 ShootBullet(shootPoses[0]);
             }
+=======
+            case ShootMode.Auto:
+                laserFx.SetPosition(0, shootPoses[0].position);
+                laserFx.SetPosition(1, shootPoses[0].position);
+                if (Input.GetButton("Fire1") && fireDelay > shootConfig.fireRate)
+                    ShootBullet(shootPoses[0]);
+                break;
+
+            case ShootMode.Laser:
+                laserFx.SetPosition(0, shootPoses[0].position);
+                laserFx.gameObject.SetActive(Input.GetButton("Fire1"));
+                if (Input.GetButton("Fire1"))
+                {
+                    ShootLaser();
+                }
+                break;
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
         }
 
         if (Input.GetButtonDown("Laser") && CurrentEnergy == MaxEnergy)
         {
-            Sc_SoundManager.Instance.PlaySound("Loading 04", 0.1f, 1.5f);
+            SoundManager.Instance.PlaySound("Loading 04", 0.1f, 1.5f);
             SwitchShootMode(ShootMode.Laser, 5);
             CurrentEnergy = 0;
         }
@@ -174,7 +231,7 @@ public class Sc_ShipController : Sc_EntityShooting
     {
         if (newColor == Color.red)
         {
-            Sc_SoundManager.Instance.PlaySound("Hurt01", 0.15f, 1);
+            SoundManager.Instance.PlaySound("Hurt01", 0.15f, 1);
             isHit = true;
         }
 
@@ -190,9 +247,7 @@ public class Sc_ShipController : Sc_EntityShooting
     public override void FixedUpdate()
     {
         if (isDead)
-        {
             rb.velocity = Vector2.zero;
-        }
         else
         {
             #if UNITY_ANDROID
@@ -212,6 +267,7 @@ public class Sc_ShipController : Sc_EntityShooting
         base.FixedUpdate();
     }
 
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
     public void PauseButton()
     {
         paused = !paused;
@@ -220,11 +276,19 @@ public class Sc_ShipController : Sc_EntityShooting
     }
 
     public override void Update()
+=======
+    void ManageInputs()
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
     {
+        //main player controls
+        inputX = Input.GetAxisRaw("Horizontal");
+        inputY = Input.GetAxisRaw("Vertical");
+
         if (Input.GetKeyDown(KeyCode.R))
             Reload();
 
         if (Input.GetButtonDown("Cancel") && !paused)
+<<<<<<< Updated upstream:Assets/Scripts/Entities/Sc_ShipController.cs
         {
             PauseButton();
         }
@@ -232,19 +296,28 @@ public class Sc_ShipController : Sc_EntityShooting
         {
             PauseButton();
         }
+=======
+            paused = true;
+        else if (paused && Input.anyKeyDown)
+            paused = false;
+    }
+>>>>>>> Stashed changes:Assets/Scripts/Entities/ShipController.cs
 
-        if (shootMode != ShootMode.Semi)
+    public override void Update()
+    {
+        if (shootMode != ShootMode.Auto)
         {
             powerUpDuration -= Time.deltaTime;
 
             if (powerUpDuration <= 0)
             {
-                shootMode = ShootMode.Semi;
-                Sc_SoundManager.Instance.PlaySound("Powering down 01", 0.1f, 1.5f);
+                shootMode = ShootMode.Auto;
+                SoundManager.Instance.PlaySound("Powering down 01", 0.1f, 1.5f);
             }
         }
 
         base.Update();
+        ManageInputs();
         Move();
     }
 }

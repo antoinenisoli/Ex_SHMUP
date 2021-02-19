@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_BulletEnemy : Sc_Bullet
+public class BulletEnemy : Bullet
 {
-    public override void Effect(Sc_Entity entity)
+    public override void Effect(Entity entity)
     {
-        if (entity.GetComponent<Sc_ShipController>())
+        if (entity.GetComponent<ShipController>())
         {
             entity.ModifyHealth(dmg);
             Destroy(gameObject);

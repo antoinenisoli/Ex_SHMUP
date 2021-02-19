@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     protected BoxCollider2D myCollider => GetComponent<BoxCollider2D>();
     protected Rigidbody2D rb => GetComponent<Rigidbody2D>();
@@ -103,5 +103,14 @@ public class Sc_Entity : MonoBehaviour
     public virtual void FixedUpdate()
     {
         
+    }
+
+    public virtual void Update()
+    {
+        spr.enabled = !isDead;
+        myCollider.enabled = !isDead;
+
+        if (isDead)
+            return;
     }
 }

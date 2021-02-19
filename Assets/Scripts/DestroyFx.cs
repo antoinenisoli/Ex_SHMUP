@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sc_DestroyFx : MonoBehaviour
+public class DestroyFx : MonoBehaviour
 {
     public void Destruction()
     {
